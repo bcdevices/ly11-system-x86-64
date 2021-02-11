@@ -1,8 +1,8 @@
-defmodule NervesSystemX8664.MixProject do
+defmodule LY11SystemX8664.MixProject do
   use Mix.Project
 
-  @github_organization "nerves-project"
-  @app :nerves_system_x86_64
+  @github_organization "bcdevices"
+  @app :ly11_system_x86_64
   @source_url "https://github.com/#{@github_organization}/#{@app}"
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
@@ -42,7 +42,8 @@ defmodule NervesSystemX8664.MixProject do
     [
       type: :system,
       artifact_sites: [
-        {:github_releases, "#{@github_organization}/#{@app}"}
+        {:github_releases, "#{@github_organization}/#{@app}"},
+        {:prefix, "https://ly-archive.iotcloud.io/"}
       ],
       build_runner_opts: build_runner_opts(),
       platform: Nerves.System.BR,
@@ -73,7 +74,7 @@ defmodule NervesSystemX8664.MixProject do
 
   defp description do
     """
-    Nerves System - x86_64
+    LY11 Nerves System - x86_64
     """
   end
 
@@ -97,6 +98,8 @@ defmodule NervesSystemX8664.MixProject do
 
   defp package_files do
     [
+      "package",
+      "external.mk",
       "fwup_include",
       "lib",
       "priv",
@@ -108,9 +111,12 @@ defmodule NervesSystemX8664.MixProject do
       "LICENSE",
       "linux-5.4.defconfig",
       "mix.exs",
+      "mix.lock",
       "nerves_defconfig",
       "post-build.sh",
       "post-createfs.sh",
+      "post-build-symlinks.sh",
+      "users_table.txt",
       "README.md",
       "VERSION"
     ]
