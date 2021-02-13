@@ -7,7 +7,7 @@ make dist
 
 set +e
 
-cp /github/home/.nerves/dl/ly11_system_rpi4* dist/
+cp /github/home/.nerves/dl/ly11_system_86_64* dist/
 
 set -e
 
