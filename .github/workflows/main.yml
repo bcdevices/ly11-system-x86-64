@@ -1,0 +1,43 @@
+name: A workflow for building Nerves system
+on: push
+
+jobs:
+  build:
+    name:  Build Nerves system
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Cache buildroot downloads
+        id: cache-downloads
+        uses: actions/cache@v1
+        with:
+          path: /home/runner/work/_temp/_github_home/.nerves/dl
+          key: buildroot-cache-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: |
+            buildroot-cache-
+            buidroot-dl-
+      - name: Clear Artifacts
+        run: rm -rf /github/home/.nerves/dl/ly11_system_x86_64-portable*
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Upload S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.PLT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PLT_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-west-1'
+          SOURCE_DIR: 'dist'
+      - name: Upload Artifacts
+        if: contains(github.ref, 'tags')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*
+          file_glob: true
+          tag: ${{ github.ref }}
