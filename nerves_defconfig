@@ -71,7 +71,7 @@ BR2_PACKAGE_SOCKETCAND=y
 # BR2_TARGET_ROOTFS_TAR is not set
 BR2_TARGET_GRUB2=y
 BR2_TARGET_GRUB2_X86_64_EFI=y
-BR2_TARGET_GRUB2_BUILTIN_MODULES="boot linux ext2 squash4 fat part_msdos normal loadenv echo true test sleep"
+BR2_TARGET_GRUB2_BUILTIN_MODULES="all_video boot linux ext2 squash4 fat part_msdos normal loadenv echo true test sleep reboot video font"
 BR2_PACKAGE_HOST_PYTHON3=y
 BR2_PACKAGE_HOST_PYTHON3_SSL=y
 BR2_NERVES_SYSTEM_NAME="ly11_system_x86_64"
