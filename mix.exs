@@ -98,7 +98,6 @@ defmodule LY11SystemX8664.MixProject do
 
   defp package_files do
     [
-      "package",
       "external.mk",
       "fwup_include",
       "lib",
@@ -111,7 +110,6 @@ defmodule LY11SystemX8664.MixProject do
       "LICENSE",
       "linux-5.4.defconfig",
       "mix.exs",
-      "mix.lock",
       "nerves_defconfig",
       "post-build.sh",
       "post-createfs.sh",
