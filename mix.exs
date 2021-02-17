@@ -39,7 +39,7 @@ defmodule LY11SystemX8664.MixProject do
   end
 
   defp nerves_package do
-    [
+    pkg = [
       type: :system,
       artifact_sites: [
         {:github_releases, "#{@github_organization}/#{@app}"},
@@ -60,6 +60,11 @@ defmodule LY11SystemX8664.MixProject do
       ],
       checksum: package_files()
     ]
+
+    case System.get_env("DOCKER_BUILD") do
+      nil -> pkg
+      _ -> [build_runner: Nerves.Artifact.BuildRunners.Docker] ++ pkg
+    end
   end
 
   defp deps do
