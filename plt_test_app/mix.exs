@@ -43,7 +43,7 @@ defmodule Test.MixProject do
       {:vintage_net_wifi, "~> 0.9.1", targets: @all_targets},
 
       # Dependencies for specific targets
-      {:ly11_system_x86_64, path: "../", runtime: false}
+      {:ly11_system_x86_64, path: "../", runtime: false, targets: :ly11_x86_64}
     ]
   end
 
