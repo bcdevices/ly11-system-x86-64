@@ -10,4 +10,5 @@ if [ -d /root/empty ]; then
   ln -sf /root/empty "$TARGET_DIR/var/empty"
 fi
 
+rm -rf "$TARGET_DIR/mnt/plt/home"
 
