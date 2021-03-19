@@ -35,5 +35,7 @@ rm -fr $TARGET_DIR/boot/grub/*
 mkdir -p $TARGET_DIR/usr/share/fwup
 NERVES_SYSTEM=$BASE_DIR $HOST_DIR/usr/bin/fwup -c -f $NERVES_DEFCONFIG_DIR/fwup-revert.conf -o $TARGET_DIR/usr/share/fwup/revert.fw
 
+mkdir -p $TARGET_DIR/data
+
 # Copy the fwup includes to the images dir
 cp -rf $NERVES_DEFCONFIG_DIR/fwup_include $BINARIES_DIR
