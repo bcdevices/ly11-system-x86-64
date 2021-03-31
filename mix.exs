@@ -125,7 +125,8 @@ defmodule LY11SystemX8664.MixProject do
       "post-build-symlinks.sh",
       "users_table.txt",
       "README.md",
-      "VERSION"
+      "VERSION",
+      "PACKAGES-VERSION"
     ]
   end
 

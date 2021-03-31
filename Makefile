@@ -13,6 +13,8 @@ DIST := $(BASE_PATH)/dist
 VERSION_FILE = VERSION
 VERSION_NUM = `cat $(VERSION_FILE)`
 
+PACKAGE_VERSION_NUM = $(shell cat PACKAGES-VERSION)
+
 ARTIFACT_DIR := $(BASE_PATH)/.nerves/artifacts/$(PRJTAG)-portable-$(VERSION_NUM)
 
 .PHONY: clean
@@ -26,8 +28,18 @@ clean:
 versions:
 		@echo "GIT_DESC: $(GIT_DESC)"
 		@echo "VERSION_TAG: $(VERSION_TAG)"
+		@echo "PACKAGE_VERSION_NUM: $(PACKAGE_VERSION_NUM)"
 		@echo "$(ARTIFACT_DIR)"
 
+
+package-%:
+	wget "https://github.com/bcdevices/ly10-buildroot-packages/releases/download/v$*/buildroot-packages-$*.tar.gz"
+	tar xzf "buildroot-packages-$*.tar.gz"
+	rm "buildroot-packages-$*.tar.gz"
+
+.PHONY: sync-packages
+sync-packages:  package-$(PACKAGE_VERSION_NUM)
+	ln -sf package-$(PACKAGE_VERSION_NUM) package
 
 build-prep:
 	-mkdir -p ./.nerves/artifacts
@@ -46,8 +58,11 @@ install-dependencies:
 install-nerves-bootstrap:
 	mix archive.install git https://github.com/nerves-project/nerves_bootstrap.git tag v1.10.2 --force
 
+.PHONY: install-prep
+install-prep: install-hex-rebar install-nerves-bootstrap sync-packages
+
 .PHONY: build
-build: versions install-hex-rebar install-nerves-bootstrap install-dependencies build-prep
+build: versions install-prep install-dependencies build-prep
 	mix compile
 
 dist-prep:
@@ -65,7 +80,7 @@ dist: dist-prep build
 
 .PHONY: build-test-app
 build-test-app:
-	cd ./plt_test_app && MIX_TARGET=$(MIX_TARGET) mix do deps.get, firmware
+	cd ./plt_test_app && ./keys.sh && MIX_TARGET=$(MIX_TARGET) mix do deps.get, firmware
 
 .PHONY: dist-test-app
 dist-test-app: build-test-app dist-prep
