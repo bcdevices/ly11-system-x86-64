@@ -121,10 +121,12 @@ defmodule LY11SystemX8664.MixProject do
       "nerves_defconfig",
       "post-build.sh",
       "post-createfs.sh",
+      "post-fakeroot.sh",
       "post-build-symlinks.sh",
       "users_table.txt",
       "README.md",
-      "VERSION"
+      "VERSION",
+      "PACKAGES-VERSION"
     ]
   end
 
