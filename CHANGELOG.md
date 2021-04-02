@@ -1,5 +1,38 @@
 # Changelog
 
+## v1.15.0
+
+This release updates to Buildroot 2021.02 and OTP 23.2.7. If you have made a
+custom system off this one, please review the `nerves_system_br v1.15.0` release
+notes.
+
+The Nerves toolchain has also been updated to v1.4.2. This brings in Linux 4.14
+headers to enable use of cdev and eBPF. This won't affect most users.
+
+* Updated dependencies
+  * [nerves_system_br v1.15.0](https://github.com/nerves-project/nerves_system_br/releases/tag/v1.15.0)
+  * [Buildroot 2021.02](http://lists.busybox.net/pipermail/buildroot/2021-March/305168.html)
+  * [Erlang/OTP 23.2.7](https://erlang.org/download/OTP-23.2.7.README)
+  * [nerves toolchains v1.4.2](https://github.com/nerves-project/toolchains/releases/tag/v1.4.2)
+
+## v1.14.0
+
+This release updates to Buildroot 2020.11.2, GCC 10.2 and OTP 23.2.4.
+
+When migrating custom systems based, please be aware of the following important
+changes:
+
+* The GCC 10.2.0 toolchain has a different name that calls out "nerves" as the
+  vendor and the naming is now more consistent with other toolchain providers.
+* Experimental support for tooling that requires more information about the
+  target has been added. The initial support focuses on zigler.
+
+* Updated dependencies
+  * [nerves_system_br: bump to v1.14.4](https://github.com/nerves-project/nerves_system_br/releases/tag/v1.14.4)
+  * [Buildroot 2020.11.2](http://lists.busybox.net/pipermail/buildroot/2021-January/302574.html)
+  * [Erlang/OTP 23.2.4](https://erlang.org/download/OTP-23.2.4.README)
+  * [Nerves toolchains 1.4.1](https://github.com/nerves-project/toolchains/releases/tag/v1.4.1)
+
 ## v1.13.4
 
 This is a bug fix release and contains no major changes.

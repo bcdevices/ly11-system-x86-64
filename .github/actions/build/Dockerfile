@@ -1,6 +1,6 @@
-FROM nervesproject/nerves_system_br:1.13.6
+FROM nervesproject/nerves_system_br:1.15.0
 
-ENV ELIXIR_VERSION=1.10.4-otp-23
+ENV ELIXIR_VERSION=1.11.4-otp-23
 
 RUN apt-get update && \
       apt-get install -y \
