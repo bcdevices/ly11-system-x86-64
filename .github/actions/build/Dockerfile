@@ -1,4 +1,4 @@
-FROM nervesproject/nerves_system_br:1.15.0
+FROM nervesproject/nerves_system_br:1.15.1
 
 ENV ELIXIR_VERSION=1.11.4-otp-23
 
